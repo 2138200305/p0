@@ -27,19 +27,19 @@ reimbursementsRouter.post('', (request: Request, response: Response) => {
    
 });
 
-// reimbursementsRouter.get('/status/:id',(request: Request, response:Response) => {
-//     const id = parseInt(request.params.id);
-//     console.log('Handling request for reimbursements with id:' +id);
-//     const reimbursements: Reimbursement = userService.getReimbursementById(id);
-//     console.log(reimbursements);
-//     if(reimbursements){
-//         response.json(reimbursements);
-//     }else{
-//         //Not found
-//         response.sendStatus(404);
-//     }
+reimbursementsRouter.get('/status/:id',(request: Request, response:Response) => {
+    const id = parseInt(request.params.id);
+    console.log('Handling request for reimbursements with id:' +id);
+    const reimbursements: Reimbursement = userService.getReimbursementById(id);
+    console.log(reimbursements);
+    if(reimbursements){
+        response.json(reimbursements);
+    }else{
+        //Not found
+        response.sendStatus(404);
+    }
 
-// });
+});
 
 reimbursementsRouter.patch('/:id',(request: Request, response:Response) => {
     console.log('Patch called accepted id');
