@@ -38,7 +38,7 @@ userRouter.get('/:id',(request: Request, response:Response) => {
 
 
 userRouter.get('/users',(request: Request, response:Response) => {
-    console.log('Querying database for users for fiancce manager: ');
+    console.log('Querying database for users for fiance manager: ');
     //const usersQuery : any = userService.getUsers();
     //console.log(users);
     //if(users) {
