@@ -1,4 +1,4 @@
-export default class RemStatus {
+export default class ReimbursementStatus {
     statusId: number;
     status: string;
 

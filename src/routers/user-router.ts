@@ -1,66 +1,57 @@
 import express, { Request, Response, request } from 'express';
-import * as userService from '../services/user-service';
 import User from '../models/User';
+import * as userService from '../services/user-service';
+
 const userRouter = express.Router();
-/*
- * A router has methods to handle specific http methods
- * Additionally, we could handle all of them using 'all'
- * Http Methods
- * ----
- * GET, POST, PATCH, PUT, DELETE
- */
-// Handle the creation of a new user
-// We want to deal strictly with the request/response objects here
-// and delegate the internal logic to a 'service'
-userRouter.post('', (request: Request, response: Response) => {
-    const user = userService.createUser(request.body);
-    if (user) {
-        response.status(201).json(user);
-    }
-    else response.sendStatus(500);
-});
 
 
-
-userRouter.get('/:id',(request: Request, response:Response) => {
-    const id = parseInt(request.params.id);
-    console.log('Handling request for user with id: '+id );
-    const user : any = userService.getUserById(id);
-    console.log(user);
-    if(user) {
-        response.json(user);
-    }else{
-        response.sendStatus(404);
-    }
-    response.json(user);
-});
+// console.log('Handling request for user with id: ' + id);
+//const user: any = userService.getUserById(id);
+//console.log(user);
 
 
+userRouter.get('/:id',
+    async (request: Request, response: Response) => {
+        const id = parseInt(request.params.id);
 
-userRouter.get('/users',(request: Request, response:Response) => {
-    console.log('Querying database for users for fiance manager: ');
-    //const usersQuery : any = userService.getUsers();
-    //console.log(users);
-    //if(users) {
-    //    response.json(users);
-    //}else{
-    //    response.sendStatus(404);
-    //}
- //   response.json(users);
-});
+        const item: User = await userService.getUserById(id);
 
-
-userRouter.patch('/:id',(request: Request, response:Response) => {
-    console.log('Patch called accepted id');
-    //const usersQuery : any = userService.getUsers();
-    //console.log(users);
-    //if(users) {
-    //    response.json(users);
-    //}else{
-    //    response.sendStatus(404);
-    //}
- //   response.json(users);
-});
+        if (item.userId) {
+            response.status(200).json(item);
+        } else {
+            response.sendStatus(404);
+        }
+    });
 
 
+userRouter.get('/users', (request: Request, response: Response) => {
+    //console.log('Querying database for users for fiance manager: ');
+    async (request: Request, response: Response) => {
+        let userMap: Map<Number, User> = new Map();
+        userMap = await userService.getUsers();
+
+        if (sessionStorage.userId && sessionStorage.password && (sessionStorage.role = 2)) {
+            //iterate through map.
+            response.status(200).json(userMap);
+        } else {
+            response.sendStatus(404);
+        }
+    };
+
+
+    userRouter.patch(' ',
+        async (request: Request, response: Response) => {
+            const patch: User = request.body;
+
+            const patchedUser: User = await userService.patchCoalese(patch);
+            if (patchedUser.userId) {
+                response.json(patchedUser);
+            } else {
+
+            }
+            response.sendStatus(200);
+        });
+
+
+    });
 export default userRouter;

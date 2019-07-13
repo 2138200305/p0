@@ -5,6 +5,7 @@ export default class User {
     firstName: string;
     lastName: string;
     email: string;
+    role: number;
 
 
     constructor(obj) {
@@ -18,6 +19,7 @@ export default class User {
         this.firstName = obj.firstName;
         this.lastName = obj.lastName;
         this.email= obj.email;
+        this.role= obj.role;
 
     }
 }

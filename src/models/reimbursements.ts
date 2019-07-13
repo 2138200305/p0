@@ -1,5 +1,4 @@
 export default class Reimbursement {
-  roleId: number;
   role: string;
   reimbursementId: number;
   author: number;
@@ -17,7 +16,6 @@ export default class Reimbursement {
       return;
     }
 
-    this.roleId = obj.roleId;
     this.role = obj.role;
     this.reimbursementId = obj.reimbursementId;
     this.author = obj.author;
