@@ -2,25 +2,17 @@ import Reimbursement from '../models/reimbursements';
 import * as reimbursementService from '../services/reimbursement-service';
 import express, { Request, Response, request } from 'express';
 import db from '../util/pg-connector';
+import Role from 'models/Role';
+import { createReimbursement } from 'services/user-service';
 const reimbursementRouter = express.Router();
 
 
-reimbursementRouter.post('',
-    (request: Request, response: Response) => {
-        const reimbursement = new Reimbursement(request.body);
+reimbursementRouter.post('', async (request: Request, response: Response) => {
 
-        reimbursementService.createReimbursement(reimbursement)
-            .then((rows) => {
-                if (rows.length > 0) {
-                    response.status(201).json(rows[0]);
-                } else {
-                    response.sendStatus(400);
-                }
-            });
+    const info = request.body;
+    let reimbursement = await reimbursementService.createReimbursement(info);
 
-
-    });
-
+});
 
 reimbursementRouter.get('/:statusCode',
     async (request: Request, response, Response) => {
@@ -29,7 +21,7 @@ reimbursementRouter.get('/:statusCode',
         const reimbursement: Reimbursement = await reimbursementService.getReimbursementByStatus(statusCode);
 
         //show a map of reimbursements
-        let reimbursementMap: Map<Number, Reimbursement> = new Map();
+    
         //iterate over each key below
         if (reimbursement.reimbursementId) {
             response.status(200).json(reimbursement);

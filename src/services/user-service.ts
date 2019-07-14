@@ -1,9 +1,10 @@
 import User from "../models/User";
 import Reimbursement from "../models/reimbursements";
 import db from "../util/pg-connector";
+import { promises } from "dns";
 
 let userCounter: number = 1;
-const userMap: Map<Number, User> = new Map();
+
 const reimbursementMap: Map<Number, Reimbursement> = new Map();
 let reimbursementCounter = 1;
 
@@ -19,27 +20,37 @@ export async function validateUser(username: string, password: string){
         // });
     } 
 
-
 export function createReimbursement(reimbursement): Reimbursement {
     reimbursement.reimbursementId = reimbursementCounter++;
     return reimbursement;
 }
 
+export async  function getUsers(): Promise<User[]>{
+    const result = await  db.query(`SELECT  * FROM "users" `);
+    return result.rows;
 
-export function getUsers() {
-    return userMap;
 }
 
 
-export function getUserById(userId: number) {
-    return userMap.get(userId);
-}
+// export async function getUsers() {
+//     const result = await db.query
+//     let users : User[] = [];
+//     for (let i of  result.rows){
+//         users.push(i);
+//     }
+//     return users;
+// }
 
 
-export function getReimbursementById(id: number) {
-    //Todo search for Reimbursement by id
-    return reimbursementMap.get(id);
+export async function getUserById(userId: number): Promise<User>{
+    const result = await  db.query(`SELECT  * FROM "users" where user_id =$1`, [userId]);
+    return result.rows[0];
 }
+
+// export function getReimbursementById(id: number) {
+//     //Todo search for Reimbursement by id
+//     return reimbursementMap.get(id);
+// }
 
 export async function patchCoalese(patch: User) {
     const result = await db.query(`UPDATE User SET first_name = COALESCE($1, first_name),\

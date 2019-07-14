@@ -13,11 +13,11 @@ loginRouter.post('', async (request: Request, response: Response) => {
 
     console.log(user);
     if (user[0].username && user[0].user_password) {
-      
+
+        console.log(`Thank you for entering your login information ${user.username} ${user.password}`);
         console.log(`Thank you for entering your login information ${user[0].username} ${user[0].password}`);
         response.status(201).json(user);
     }
     else response.status(400).json({message: 'Invalid Credentials'});
 });
-    
 export default loginRouter;

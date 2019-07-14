@@ -14,13 +14,14 @@ import reimbursementRouter from './routers/reimbursement-router';
 import { closePool } from './util/pg-connector';
 
 
+
 //Creating an instance of an express App by callng the express method
 const app = express();
 
 //process
-const port = process.env.port||3007;
+const port = process.env.port||3018;
 
-//close the pool when app shuts down
+//close the pool when app shuts don
 process.on('SIGINT',  async () => {
     await closePool();
 });

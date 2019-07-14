@@ -2,23 +2,25 @@ import Reimbursement from '../models/reimbursements';
 import db from '../util/pg-connector';
 import { deepEqual } from 'assert';
 
+
+
 export function createReimbursement(reimbursement: Reimbursement):
+
     Promise<Reimbursement[]> {
     // enforce business rules
     if (!reimbursement.author) {
         console.warn('Reimbursement item requires name');
     }
 
-return db.query(`INSERT INTO  Reimbursement (author, amount, description, reimbursementType)
-VALUES ($1, $2, $3, $4) RETURNING author, amount, description, type`,
-    [reimbursement.author, reimbursement.amount, reimbursement.description, reimbursement.type])
+return db.query(`INSERT INTO  Reimbursement (role, author, amount, description, dateSubmitted, status, reimbursementType)
+VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING role, author, amount, description, dateSubmitted, status, type`,
+    [reimbursement.role, reimbursement.author, reimbursement.amount, reimbursement.description, reimbursement.dateSubmitted, reimbursement.status, reimbursement.type])
     .then((data) => {
         return data.rows;
     }).catch((err) => {
         return [];
     });
 }
-
 
 export async function getReimbursementById(id: number): Promise<Reimbursement> {
     const result = await db.query(`SELECT id, item_name "author", amount
