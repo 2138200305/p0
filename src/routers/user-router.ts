@@ -8,6 +8,7 @@ const userRouter = express.Router();
 userRouter.get('',
     async (request: any, response: Response) => {
         console.log(request.token);
+        console.log(request.token.role);
         if(request.token.role ==2){
         const user = await userService.getUsers();
         if (user) {

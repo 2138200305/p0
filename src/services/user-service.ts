@@ -60,17 +60,17 @@ export async function getUserById(userId: number): Promise<User>{
 //     }
 // }
 export async function patchCoalese(patch: User) {
-    console.log("print variables" , patch.username, patch.password, patch.firstName, patch.lastName,  patch.email, patch.role, patch.userId);
+    console.log("print variables" , patch.username, patch.password, patch.firstName, patch.lastName, patch.email, patch.role, patch.userId);
     const result = await db.query(`UPDATE users SET 
-    username = COALESCE($1, username),
-    user_password = COALESCE($2, user_password),
-    firstname = COALESCE($3, firstname),
-    lastname = COALESCE($4, lastname),
-    email = COALESCE($5, email),
-    user_role = COALESCE($6, user_role)
-    WHERE user_id = $7 
-    RETURNING user_id "userId", username, user_password, firstname, lastname, email, user_role;`,
-        [patch.username, patch.password, patch.firstName, patch.lastName,  patch.email, patch.role, patch.userId]);
+            username = COALESCE($1, username),\
+            password = COALESCE($2, password),
+            firstname = COALESCE($3, firstname),
+            lastname = COALESCE($4, lastname),
+            email = COALESCE($5, email),
+            role = COALESCE($6, role)
+            WHERE userid = $7 
+            RETURNING userid, username, password, firstname, lastname, email, role;`,
+         [patch.username, patch.password, patch.firstName, patch.lastName, patch.email, patch.role, patch.userId]);
 
     if (result.rowCount === 0) {
         // throw error, 404

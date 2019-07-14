@@ -8,18 +8,19 @@ import loginRouter from './routers/login-router';
 
 import reimbursementRouter from './routers/reimbursement-router';
 
-import { closePool } from './util/pg-connector';
+//import { closePool } from './util/pg-connector';
 import checkToken from './util/validateToken';
+
 //process
-const port = process.env.port||3057;
+const port = process.env.port||3070;
 
 //Creating an instance of an express App by callng the express method
 const app = express();
 
 //close the pool when app shuts don
-process.on('SIGINT',  async () => {
-    await closePool();
-});
+// process.on('SIGINT',  async () => {
+//     await closePool();
+// });
 
 //Register middleware
 app.use(bodyParser.json());
