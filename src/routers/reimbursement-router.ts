@@ -20,9 +20,6 @@ reimbursementRouter.get('/:statusCode',
 
         const reimbursement: Reimbursement = await reimbursementService.getReimbursementByStatus(statusCode);
 
-        //show a map of reimbursements
-    
-        //iterate over each key below
         if (reimbursement.reimbursementId) {
             response.status(200).json(reimbursement);
         } else {

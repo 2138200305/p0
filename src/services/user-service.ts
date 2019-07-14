@@ -32,16 +32,6 @@ export async  function getUsers(): Promise<User[]>{
 }
 
 
-// export async function getUsers() {
-//     const result = await db.query
-//     let users : User[] = [];
-//     for (let i of  result.rows){
-//         users.push(i);
-//     }
-//     return users;
-// }
-
-
 export async function getUserById(userId: number): Promise<User>{
     const result = await  db.query(`SELECT  * FROM "users" where user_id =$1`, [userId]);
     return result.rows[0];
@@ -52,11 +42,35 @@ export async function getUserById(userId: number): Promise<User>{
 //     return reimbursementMap.get(id);
 // }
 
+// export async function patchCoalese(patch: User) {
+//     const result = await db.query(`UPDATE "users" SET firstName = COALESCE($1, firstName),\
+//     lastName = COALESCE($2, lastName),\
+//     username = COALESCE($3, username),\
+//     password = COALESCE($4, password),\
+//     email = COALESCE($5, email),\
+//     role = COALESCE($6, role)
+//      WHERE userId = $7 
+//     RETURNING userId, firstName, lastName, username, password, email, role ; `,
+//         [patch.firstName, patch.username, patch.lastName, patch.password, patch.email,patch.role, patch.userId]);
+
+//     if (result.rowCount === 0) {
+//         // throw error, 404
+//     } else {
+//         return result.rows[0];
+//     }
+// }
 export async function patchCoalese(patch: User) {
-    const result = await db.query(`UPDATE User SET first_name = COALESCE($1, first_name),\
-    last_name = COALESCE($2, last_name) WHERE userId = $3 \
-    RETURNING username , password , firstName "first_name" , lastName "last_name" , email ,role, userId ; `,
-        [patch.firstName, patch.lastName, patch.userId]);
+    console.log("print variables" , patch.username, patch.password, patch.firstName, patch.lastName,  patch.email, patch.role, patch.userId);
+    const result = await db.query(`UPDATE users SET 
+    username = COALESCE($1, username),
+    user_password = COALESCE($2, user_password),
+    firstname = COALESCE($3, firstname),
+    lastname = COALESCE($4, lastname),
+    email = COALESCE($5, email),
+    user_role = COALESCE($6, user_role)
+    WHERE user_id = $7 
+    RETURNING user_id "userId", username, user_password, firstname, lastname, email, user_role;`,
+        [patch.username, patch.password, patch.firstName, patch.lastName,  patch.email, patch.role, patch.userId]);
 
     if (result.rowCount === 0) {
         // throw error, 404
