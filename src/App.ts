@@ -11,7 +11,7 @@ import reimbursementRouter from './routers/reimbursement-router';
 import { closePool } from './util/pg-connector';
 import checkToken from './util/validateToken';
 //process
-const port = process.env.port||3050;
+const port = process.env.port||3057;
 
 //Creating an instance of an express App by callng the express method
 const app = express();
@@ -29,7 +29,6 @@ app.use(session({
     resave:false,
     saveUnitialized:true,
     secret:'my-secret',
-
 }));
 
 //Register Routers

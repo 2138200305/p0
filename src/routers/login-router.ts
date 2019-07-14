@@ -14,16 +14,17 @@ loginRouter.post('', async (request: Request, response: Response) => {
     let user : User = await userService.validateUser(username, password);
     
     console.log(user);
-    if (user[0].username && user[0].user_password) {
+    if (user.username && user.password) {
         console.log(user);
     
         const token = jwt.sign({userId:user.userId, role: user.role}, 
-            "tampaflorida" , //secretkey
+            
+                "tampaflorida" , //secretkey
                { expiresIn : "24hr" , //expires in 1 min
             } );
         console.log(token);
         console.log(`Thank you for entering your login information ${user.username} ${user.password}`);
-        console.log(`Thank you for entering your login information ${user[0].username} ${user[0].password}`);
+        console.log(`Thank you for entering your login information ${user.username} ${user.password}`);
        // response.status(200).json(user)
        response.status(200).json({
            message: user,

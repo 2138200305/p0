@@ -124,3 +124,9 @@ select * from users where username like	'techgod' and user_password like 'tgpass
 
 insert into reimbursement (author, amount, datesubmitted, description, status,reimbursementtype) values
 	(1, 89.39, '7-4-2019', 'lodging order',1, 1);
+
+	select * from users;
+
+
+select * from users where username like	'techgod' and user_password like 'tgpassword';
+
