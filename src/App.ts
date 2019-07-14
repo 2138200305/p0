@@ -1,25 +1,20 @@
-//import express , {Request, Response} from 'express';
-//import * as express , {Request, Request} from 'express';
-//const bodyParser  = require('body-parser');
 
-//import * as bodyParser from 'body-parser';
 import bodyParser from 'body-parser';
 import express from 'express';
 import session from 'express-session';
 
 import userRouter from './routers/user-router';
 import loginRouter from './routers/login-router';
+
 import reimbursementRouter from './routers/reimbursement-router';
 
 import { closePool } from './util/pg-connector';
-
+import checkToken from './util/validateToken';
 //process
-const port = process.env.port||3037;
-
+const port = process.env.port||3050;
 
 //Creating an instance of an express App by callng the express method
 const app = express();
-
 
 //close the pool when app shuts don
 process.on('SIGINT',  async () => {
@@ -38,10 +33,9 @@ app.use(session({
 }));
 
 //Register Routers
-app.use("/users", userRouter);
-app.use("/login",  loginRouter);
-app.use("/reimbursements",  reimbursementRouter);
-
+app.use("/users", checkToken, userRouter);
+app.use("/login",   loginRouter);
+app.use("/reimbursements", checkToken,  reimbursementRouter);
 
 //Open port
 app.listen(port, () => {

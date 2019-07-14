@@ -5,16 +5,17 @@ import { deepEqual } from 'assert';
 
 
 export function createReimbursement(reimbursement: Reimbursement):
-
     Promise<Reimbursement[]> {
     // enforce business rules
     if (!reimbursement.author) {
         console.warn('Reimbursement item requires name');
     }
-
-return db.query(`INSERT INTO  Reimbursement (role, author, amount, description, dateSubmitted, status, reimbursementType)
-VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING role, author, amount, description, dateSubmitted, status, type`,
-    [reimbursement.role, reimbursement.author, reimbursement.amount, reimbursement.description, reimbursement.dateSubmitted, reimbursement.status, reimbursement.type])
+console.log(reimbursement);
+//insert into reimbursement (author, amount, datesubmitted, description, status,reimbursementtype) values
+//	(1, 89.39, '7-4-2019', 'lodging order',1, 1);
+return db.query(`INSERT INTO  Reimbursement (author, amount, datesubmitted, description, status,reimbursementtype)
+VALUES ($1, $2, $3, $4, $5, $6) RETURNING author, amount, datesubmitted, description, status,reimbursementtype`,
+    [reimbursement.author, reimbursement.amount, reimbursement.dateSubmitted, reimbursement.description, reimbursement.status, reimbursement.type])
     .then((data) => {
         return data.rows;
     }).catch((err) => {
@@ -23,13 +24,13 @@ VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING role, author, amount, description,
 }
 
 export async function getReimbursementById(id: number): Promise<Reimbursement> {
-    const result = await  db.query(`SELECT  * FROM "reimbursement" where reimbursementid =$1`, [id]);
+    const result = await  db.query(`SELECT  * FROM reimbursement where reimbursementid =$1`, [id]);
     return result.rows[0];
 }
 
 
 export async function getReimbursementByStatus(StatusCode: number): Promise<Reimbursement> {
-    const result = await db.query(`SELECT * FROM "reimbursement" where status =$1`, [StatusCode]);
+    const result = await db.query(`SELECT * FROM reimbursement where status =$1`, [StatusCode]);
     return result.rows;
 }
 

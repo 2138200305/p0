@@ -5,7 +5,6 @@ import { promises } from "dns";
 
 let userCounter: number = 1;
 
-const reimbursementMap: Map<Number, Reimbursement> = new Map();
 let reimbursementCounter = 1;
 
 export async function validateUser(username: string, password: string){
@@ -21,7 +20,8 @@ export async function validateUser(username: string, password: string){
     } 
 
 export function createReimbursement(reimbursement): Reimbursement {
-    reimbursement.reimbursementId = reimbursementCounter++;
+    //deprecated
+    //reimbursement.reimbursementId = reimbursementCounter++;
     return reimbursement;
 }
 

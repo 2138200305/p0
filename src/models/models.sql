@@ -80,3 +80,47 @@ insert into Users (username, user_password, firstName, lastName, email,user_role
 
 	insert into Users (username, user_password, firstName, lastName, email,user_role) values
 	('techgod', 'tgpassword', 'Tech', 'Employee', 'tech@gmail.com', 3 );
+
+
+
+
+
+
+//add user json
+{
+    "userId": 2,
+    "username": "techgod",
+    "password": "longPassword",
+    "firstName": "Tech",
+    "lastName": "Employee",
+     "email": "tech@gmail.com",
+     "role": 3
+    }
+
+//add reimbursement json
+	{
+
+    "author": "1",
+    "amount": "800.47",
+    "dateSubmitted": "7-14-2013",
+    "description": "iQ order",
+    "status": "1",
+    "type": "1"
+	
+	
+}
+
+
+//sql examples
+select * from users;
+
+select * from users where username like	'techgod' and user_password like 'tgpassword';
+
+select * from reimbursement where reimbursementid = 2;
+select * from reimbursement;
+
+select * from users where username like	'techgod' and user_password like 'tgpassword';
+
+
+insert into reimbursement (author, amount, datesubmitted, description, status,reimbursementtype) values
+	(1, 89.39, '7-4-2019', 'lodging order',1, 1);
