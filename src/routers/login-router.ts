@@ -7,10 +7,15 @@ let jwt = require('jsonwebtoken');
 const loginRouter = express.Router();
 
 loginRouter.post('', async (request: Request, response: Response) => {
+    console.log(response);
+    // let username= request.body.username;
+    // let password= request.body.password;
+    // console.log(username, password);
+    const cred = request.body;
+    // // Retrieve both username and password from the request
+    const username = cred["username"];
+    const password = cred["password"];
 
-    let username= request.body.username;
-    let password= request.body.password;
-    console.log(username, password);
     let user : User = await userService.validateUser(username, password);
     
     console.log(user);
@@ -20,7 +25,7 @@ loginRouter.post('', async (request: Request, response: Response) => {
         const token = jwt.sign({userId:user.userId, role: user.role}, 
             
                 "tampaflorida" , //secretkey
-               { expiresIn : "24hr" , //expires in 1 min
+               { expiresIn : "24hr" , //expires in 24 hr
             } );
         console.log(token);
         console.log(`Thank you for entering your login information ${user.username} ${user.password}`);
@@ -32,6 +37,6 @@ loginRouter.post('', async (request: Request, response: Response) => {
             token: {token}
        });
     }
-    else response.status(400).json({message: 'Invalid Credentials'});
+    else response.status(400).json({message: 'You are not authorized for this operation'});
 });
 export default loginRouter;

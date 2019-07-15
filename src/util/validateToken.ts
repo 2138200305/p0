@@ -10,7 +10,7 @@ let checkToken = (req, res, next) => {
       if (err) {
         return res.json({
           success: false,
-          message: 'Token is not valid'
+          message: 'You are not authorized for this operation'
         });
       } else {
         req.token= decodedToken;
@@ -20,7 +20,7 @@ let checkToken = (req, res, next) => {
   } else {
     return res.json({
       success: false,
-      message: 'Auth token is not supplied'
+      message: 'You are not authorized for this operation'
     });
   }
 };
