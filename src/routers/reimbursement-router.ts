@@ -30,13 +30,13 @@ reimbursementRouter.get('/status/:statusId',
     });
 
 
-reimbursementRouter.get('/:id',
+reimbursementRouter.get('/author/:id',
     async (request: Request, response, Response) => {
         const id = parseInt(request.params.id);
+        console.log(id);
+        const reimbursement: Reimbursement = await reimbursementService.getReimbursementByAuthorId(id);
 
-        const reimbursement: Reimbursement = await reimbursementService.getReimbursementById(id);
-
-        if (reimbursement.reimbursementId) {
+        if (reimbursement) {
             response.status(200).json(reimbursement);
         } else {
             response.sendStatus(404);

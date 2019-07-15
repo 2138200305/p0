@@ -23,9 +23,9 @@ VALUES ($1, $2, $3, $4, $5, $6) RETURNING author, amount, datesubmitted, descrip
     });
 }
 
-export async function getReimbursementById(id: number): Promise<Reimbursement> {
-    const result = await  db.query(`SELECT  * FROM reimbursement where reimbursementid =$1`, [id]);
-    return result.rows[0];
+export async function getReimbursementByAuthorId(id: number): Promise<Reimbursement> {
+    const result = await  db.query(`SELECT  * FROM reimbursement where author =$1`, [id]);
+    return result.rows;
 }
 
 
