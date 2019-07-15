@@ -127,6 +127,26 @@ insert into reimbursement (author, amount, datesubmitted, description, status,re
 
 	select * from users;
 
+ALTER TABLE users RENAME COLUMN user_id TO userId;
+ALTER TABLE users RENAME COLUMN user_password TO password;
+ALTER TABLE users RENAME COLUMN firstname TO firstName;
+ALTER TABLE users RENAME COLUMN lastname TO lastName;
+ALTER TABLE users RENAME column user_role TO role;
+
+
+userId: number;
+    username: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    role: number;
+
+
 
 select * from users where username like	'techgod' and user_password like 'tgpassword';
+insert into Users (username, password, firstname, lastname, email,role) values
+	('dylan', 'dpassword', 'Dylan', 'Adams', 'adams@gmail.com', 2);
+	insert into Users (username, password, firstname, lastname, email,role) values
+	('smart', 'kpassword', 'Kyle', 'Sir', 'kyle@gmail.com', 1);
 

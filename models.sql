@@ -48,19 +48,3 @@ status INTEGER references ReimbursementStatus(statusId),
 reimbursementType INTEGER references ReimbursementType(typeId)
 );
 
-
-ALTER TABLE users RENAME COLUMN user_id TO userId;
-ALTER TABLE users RENAME COLUMN user_password TO password;
-ALTER TABLE users RENAME COLUMN firstname TO firstName;
-ALTER TABLE users RENAME COLUMN lastname TO lastName;
-ALTER TABLE users RENAME column user_role TO role;
-
-
-userId: number;
-    username: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    role: number;
-

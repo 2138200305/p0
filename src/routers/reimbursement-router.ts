@@ -14,13 +14,15 @@ reimbursementRouter.post('', async (request: Request, response: Response) => {
 
 });
 
-reimbursementRouter.get('/:statusCode',
-    async (request: Request, response, Response) => {
-        const statusCode = parseInt(request.params.id);
+
+
+reimbursementRouter.get('/status/:statusId',
+    async (request: Request, response: Response) => {
+        const statusCode = parseInt(request.params.statusId);
 
         const reimbursement: Reimbursement = await reimbursementService.getReimbursementByStatus(statusCode);
 
-        if (reimbursement.reimbursementId) {
+        if (reimbursement) {
             response.status(200).json(reimbursement);
         } else {
             response.sendStatus(404);

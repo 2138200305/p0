@@ -12,7 +12,7 @@ import { closePool } from './util/pg-connector';
 import checkToken from './util/validateToken';
 
 //process
-const port = process.env.port||3081;
+const port = process.env.port||3000;
 
 //Creating an instance of an express App by callng the express method
 const app = express();
