@@ -8,8 +8,9 @@ let userCounter: number = 1;
 let reimbursementCounter = 1;
 
 export async function validateUser(username: string, password: string){
-    const result = await db.query(`select * from users where username = $1 and password = $2;`,
+    const result = await db.query(`select userid, username,firstname,lastname,email,role from users where username = $1 and password = $2;`,
     [username, password]);
+    console.log(result.rows);
     return result.rows[0];
     } 
 
@@ -20,14 +21,14 @@ export function createReimbursement(reimbursement): Reimbursement {
 }
 
 export async  function getUsers(): Promise<User[]>{
-    const result = await  db.query(`SELECT  * FROM "users" `);
+    const result = await  db.query(`SELECT  userid, username,firstname,lastname,email,role FROM "users" `);
     return result.rows;
 
 }
 
 
 export async function getUserById(userId: number): Promise<User>{
-    const result = await  db.query(`SELECT  * FROM "users" where userId =$1`, [userId]);
+    const result = await  db.query(`SELECT  userid, username,firstname,lastname,email,role FROM "users" where userId =$1`, [userId]);
     return result.rows[0];
 }
 
@@ -41,7 +42,7 @@ export async function patchCoalese(patch: User) {
             email = COALESCE($5, email),
             role = COALESCE($6, role)
             WHERE userid = $7 
-            RETURNING userid, username, password, firstname, lastname, email, role;`,
+            RETURNING userid, username, firstname, lastname, email, role;`,
          [patch.username, patch.password, patch.firstName, patch.lastName, patch.email, patch.role, patch.userId]);
 
     if (result.rowCount === 0) {
@@ -50,11 +51,3 @@ export async function patchCoalese(patch: User) {
         return result.rows[0];
     }
 }
-
-// userId: number;
-// username: string;
-// password: string;
-// firstName: string;
-// lastName: string;
-// email: string;
-// role: number;

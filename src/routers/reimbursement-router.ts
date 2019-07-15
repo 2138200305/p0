@@ -23,6 +23,15 @@ reimbursementRouter.post('', async (request: Request, response: Response) => {
 });
 
 
+// const patchedR: any = await reimbursementService.patchCoalese(patch);
+        
+// // console.log(patchedR);
+// if (patchedR.reimbursementid) {
+ 
+//     response.status(200).json(patchedR);
+// } else {
+//     response.sendStatus(404);
+// }
 
 reimbursementRouter.get('/status/:statusId',
     async (request: Request, response: Response) => {
