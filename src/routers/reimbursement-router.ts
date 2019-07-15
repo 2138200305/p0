@@ -9,8 +9,16 @@ const reimbursementRouter = express.Router();
 
 reimbursementRouter.post('', async (request: Request, response: Response) => {
 
-    const info = request.body;
+    const info:Reimbursement = request.body;
+    //console.log(request.body);
+    console.log(info);
     let reimbursement = await reimbursementService.createReimbursement(info);
+    if (reimbursement) {
+        response.status(200).json(reimbursement);
+    } else {
+        response.sendStatus(404);
+    }
+    
 
 });
 

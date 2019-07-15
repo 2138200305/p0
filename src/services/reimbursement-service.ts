@@ -7,15 +7,17 @@ import { deepEqual } from 'assert';
 export function createReimbursement(reimbursement: Reimbursement):
     Promise<Reimbursement[]> {
     // enforce business rules
+    console.log(reimbursement)
     if (!reimbursement.author) {
         console.warn('Reimbursement item requires name');
     }
 console.log(reimbursement);
 //insert into reimbursement (author, amount, datesubmitted, description, status,reimbursementtype) values
 //	(1, 89.39, '7-4-2019', 'lodging order',1, 1);
-return db.query(`INSERT INTO  Reimbursement (author, amount, datesubmitted, description, status,reimbursementtype)
+return db.query(`INSERT INTO  reimbursement (author, amount, datesubmitted, description, status,reimbursementtype)
 VALUES ($1, $2, $3, $4, $5, $6) RETURNING author, amount, datesubmitted, description, status,reimbursementtype`,
     [reimbursement.author, reimbursement.amount, reimbursement.dateSubmitted, reimbursement.description, reimbursement.status, reimbursement.type])
+    
     .then((data) => {
         return data.rows;
     }).catch((err) => {

@@ -48,3 +48,10 @@ status INTEGER references ReimbursementStatus(statusId),
 reimbursementType INTEGER references ReimbursementType(typeId)
 );
 
+SELECT * FROM reimbursement;
+SELECT * FROM reimbursement where status = 2;
+
+
+INSERT INTO  reimbursement (author, amount, datesubmitted, description, status,reimbursementtype)
+values (1, .03, '01-01-209', 'into to description', 1, 1)
+ RETURNING author, amount, datesubmitted, description, status,reimbursementtype;

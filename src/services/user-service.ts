@@ -36,12 +36,6 @@ export async function getUserById(userId: number): Promise<User>{
     const result = await  db.query(`SELECT  * FROM "users" where userId =$1`, [userId]);
     return result.rows[0];
 }
-
-// export function getReimbursementById(id: number) {
-//     //Todo search for Reimbursement by id
-//     return reimbursementMap.get(id);
-// }
-
 // export async function patchCoalese(patch: User) {
 //     const result = await db.query(`UPDATE "users" SET firstName = COALESCE($1, firstName),\
 //     lastName = COALESCE($2, lastName),\
