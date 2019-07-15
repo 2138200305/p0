@@ -37,17 +37,42 @@ export async function getReimbursementByStatus(StatusCode: number): Promise<Reim
 }
 
 export async function patchCoalese(patch: Reimbursement) {
+    console.log("print variables" , patch.amount, patch.description, patch.reimbursementId);
 //role, reimbursementId, author, amount, dateSubmitted, dateResolved, description, resolver, status, type;
-    const result = await db.query(`UPDATE Reimbursement SET modify_amount = COALESCE($1, modify_amount),\
-    modify_description = COALESCE($2, modify_description) WHERE userId = $3 \
-    RETURNING role, reimbursementId, author, amount "amount" , description "description", dateSubmitted, dateResolved, resolver, status, type; `,
-        [patch.amount, patch.description, patch.reimbursementId]);
-
+//reimbursementid|author|amount|datesubmitted|dateresolved|description |resolver|status|reimbursementtype| 
+const result = await db.query(`UPDATE reimbursement SET     
+    amount = COALESCE($1, amount),\
+    dateresolved = COALESCE($2, dateresolved) ,
+    description = COALESCE($3, description),
+    resolver = COALESCE($4, resolver) 
+    WHERE reimbursementid = $5 \
+    RETURNING reimbursementid, author, amount,description, datesubmitted, dateresolved, resolver, status, reimbursementtype; `,
+    [patch.amount, patch.dateResolved, patch.description, patch.resolver, patch.reimbursementId]);
     if (result.rowCount === 0) {
         // throw error, 404
     } else {
         return result.rows[0];
     }
 }
+
+// export async function patchCoalese(patch: User) {
+//     console.log("print variables" , patch.username, patch.password, patch.firstName, patch.lastName, patch.email, patch.role, patch.userId);
+//     const result = await db.query(`UPDATE users SET 
+//             username = COALESCE($1, username),\
+//             password = COALESCE($2, password),
+//             firstname = COALESCE($3, firstname),
+//             lastname = COALESCE($4, lastname),
+//             email = COALESCE($5, email),
+//             role = COALESCE($6, role)
+//             WHERE userid = $7 
+//             RETURNING userid, username, password, firstname, lastname, email, role;`,
+//          [patch.username, patch.password, patch.firstName, patch.lastName, patch.email, patch.role, patch.userId]);
+
+//     if (result.rowCount === 0) {
+//         // throw error, 404
+//     } else {
+//         return result.rows[0];
+//     }
+// }
 
     

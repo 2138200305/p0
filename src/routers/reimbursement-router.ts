@@ -18,7 +18,7 @@ reimbursementRouter.post('', async (request: Request, response: Response) => {
     } else {
         response.sendStatus(404);
     }
-    
+
 
 });
 
@@ -54,7 +54,7 @@ reimbursementRouter.get('/author/:id',
 reimbursementRouter.patch('',
     async (request: Request, response: Response) => {
         const patch: Reimbursement = request.body;
-
+        console.log(patch);
         const patchedR: Reimbursement = await reimbursementService.patchCoalese(patch);
 
         if (patchedR.reimbursementId) {

@@ -11,12 +11,6 @@ export async function validateUser(username: string, password: string){
     const result = await db.query(`select * from users where username = $1 and password = $2;`,
     [username, password]);
     return result.rows[0];
-
-        // .then((data) => {
-        //     return data.rows;
-        // }).catch((err) => {
-        //     return [];
-        // });
     } 
 
 export function createReimbursement(reimbursement): Reimbursement {
@@ -36,23 +30,7 @@ export async function getUserById(userId: number): Promise<User>{
     const result = await  db.query(`SELECT  * FROM "users" where userId =$1`, [userId]);
     return result.rows[0];
 }
-// export async function patchCoalese(patch: User) {
-//     const result = await db.query(`UPDATE "users" SET firstName = COALESCE($1, firstName),\
-//     lastName = COALESCE($2, lastName),\
-//     username = COALESCE($3, username),\
-//     password = COALESCE($4, password),\
-//     email = COALESCE($5, email),\
-//     role = COALESCE($6, role)
-//      WHERE userId = $7 
-//     RETURNING userId, firstName, lastName, username, password, email, role ; `,
-//         [patch.firstName, patch.username, patch.lastName, patch.password, patch.email,patch.role, patch.userId]);
 
-//     if (result.rowCount === 0) {
-//         // throw error, 404
-//     } else {
-//         return result.rows[0];
-//     }
-// }
 export async function patchCoalese(patch: User) {
     console.log("print variables" , patch.username, patch.password, patch.firstName, patch.lastName, patch.email, patch.role, patch.userId);
     const result = await db.query(`UPDATE users SET 
