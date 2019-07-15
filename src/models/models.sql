@@ -150,3 +150,93 @@ insert into Users (username, password, firstname, lastname, email,role) values
 	insert into Users (username, password, firstname, lastname, email,role) values
 	('smart', 'kpassword', 'Kyle', 'Sir', 'kyle@gmail.com', 1);
 
+test commit
+
+{
+    "userid": 4,
+    "username": "smart",
+    "password": "kpassword",
+    "firstname": "Kyle",
+    "lastname": "SirMonday",
+    "email": "kyle@gmail.com",
+    "role": 1
+}
+
+   
+
+"author": "1",
+"amount": ".03", 
+"dateSubmitted": "01-01-209",
+"description":"into to description", 
+"status": "1", 
+"type":"1"
+
+{
+
+	"role": 1,
+    "reimbursementId": 2,
+    "author": 1,
+    "amount": 10.57,
+    "dateSubmitted": "7-15-2019",
+    "dateResolved": "7-1-2019",
+    "description": "descripition order",
+    "resolver": 2,
+    "status": 1,
+    "type": 1
+	
+	
+}
+
+
+{
+"author": 1,
+"amount": ".03", 
+"dateSubmitted": "01-01-2019",
+"description":"into to description", 
+"status": 1, 
+"type":1
+}
+
+
+{
+"author": 1,
+"amount": ".63", 
+"dateSubmitted": "01-01-2019",
+"description":"kyle to one on one", 
+"status": 1, 
+"type":1
+}
+
+{
+
+	"role": 1,
+    "reimbursementId": 2,
+    "author": 1,
+    "amount": 100.99,
+    "dateSubmitted": "7-15-2019",
+    "dateResolved": "7-1-2019",
+    "description": "patch descripition order",
+    "resolver": 2,
+    "status":2 ,
+    "type": 1
+	
+	
+}
+
+
+{
+
+	"role": 1,
+    "reimbursementId": 2,
+    "author": 1,
+    "amount": 500.00,
+    "dateSubmitted": "7-15-2019",
+    "dateResolved": "7-1-2019",
+    "description": "updaer",
+    "resolver": 2,
+    "status":2 ,
+    "type": 1
+	
+	
+}
+

@@ -55,14 +55,17 @@ reimbursementRouter.patch('',
     async (request: Request, response: Response) => {
         const patch: Reimbursement = request.body;
         console.log(patch);
-        const patchedR: Reimbursement = await reimbursementService.patchCoalese(patch);
-
-        if (patchedR.reimbursementId) {
-            response.json(patchedR)
+        const patchedR: any = await reimbursementService.patchCoalese(patch);
+        
+        console.log(patchedR);
+        if (patchedR.reimbursementid) {
+         
+            response.status(200).json(patchedR);
         } else {
-
+            response.sendStatus(404);
         }
-        response.sendStatus(200);
+
     });
+
 
 export default reimbursementRouter;
