@@ -1,3 +1,18 @@
+//patch users
+
+{
+    
+    "username": "smart",
+    "password": "Tpassword",
+    "firstName": "Tuesday",
+    "lastName": "SirTuesday",
+    "email": "present@yahoo.com",
+    "role": 1,
+    "userId": 4
+}
+
+
+
 drop table if exists ReimbursementStatus;
 drop table if exists ReimbursementType;
 drop table if exists Reimbursement;

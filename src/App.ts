@@ -12,7 +12,9 @@ import { closePool } from './util/pg-connector';
 import checkToken from './util/validateToken';
 
 //process
-const port = process.env.port||3000;
+
+let number = Math.floor(Math.random() * 10000)
+const port = process.env.port|| number ;
 
 //Creating an instance of an express App by callng the express method
 const app = express();
