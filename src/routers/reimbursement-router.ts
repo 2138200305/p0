@@ -23,20 +23,12 @@ reimbursementRouter.post('', async (request: Request, response: Response) => {
 });
 
 
-// const patchedR: any = await reimbursementService.patchCoalese(patch);
-        
-// // console.log(patchedR);
-// if (patchedR.reimbursementid) {
- 
-//     response.status(200).json(patchedR);
-// } else {
-//     response.sendStatus(404);
-// }
-
 reimbursementRouter.get('/status/:statusId',
-    async (request: Request, response: Response) => {
-        const statusCode = parseInt(request.params.statusId);
+    async (request: any, response: Response) => {
+        const statusCode = parseInt(request.params.statusId)
 
+        console.log(request.token.role);
+        if(request.token.role ==2){
         const reimbursement: Reimbursement = await reimbursementService.getReimbursementByStatus(statusCode);
 
         if (reimbursement) {
@@ -44,12 +36,22 @@ reimbursementRouter.get('/status/:statusId',
         } else {
             response.sendStatus(404);
         }
+    }
+    else{
+        response.status(401).json({
+            message:"You are not authorized for this operation" 
+        });
+    }
+
     });
 
 
-reimbursementRouter.get('/author/:id',
-    async (request: Request, response, Response) => {
+reimbursementRouter.get('/author/:userId',
+    async (request: any, response, Response) => {
         const id = parseInt(request.params.id);
+        // if (request.session.role == 1&& request.session.uid != id ){
+        //     response.sendStatus(404);
+        // }
         console.log(id);
         const reimbursement: Reimbursement = await reimbursementService.getReimbursementByAuthorId(id);
 

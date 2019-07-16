@@ -6,7 +6,7 @@ let jwt = require('jsonwebtoken');
 
 const loginRouter = express.Router();
 
-loginRouter.post('', async (request: Request, response: Response) => {
+loginRouter.post('', async (request: any, response: Response) => {
    // console.log(response);
     // let username= request.body.username;
     // let password= request.body.password;
@@ -18,12 +18,17 @@ loginRouter.post('', async (request: Request, response: Response) => {
     const password = cred["password"];
 console.log (username, password);
     let user : any = await userService.validateUser(username, password);
+
    
     if (user === undefined)
         response.status(400).json({message: 'You are not authorized for this operation'});
     //console.log(user);
     else if (user.userid) {
             console.log(user);
+            request.session.uid = user.userid;
+            request.session.role = user.role;
+            console.log(request.session.uid,request.session.role );
+
         
             const token = jwt.sign({userId:user.userId, role: user.role}, 
                 

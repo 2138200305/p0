@@ -33,9 +33,11 @@ app.use(session({
 }));
 
 //Register Routers
-app.use("/users", checkToken, userRouter);
+//app.use("/users", checkToken, userRouter);
+app.use("/users", userRouter);
 app.use("/login",   loginRouter);
-app.use("/reimbursements", checkToken,  reimbursementRouter);
+//app.use("/reimbursements", checkToken,  reimbursementRouter);
+app.use("/reimbursements",  reimbursementRouter);
 
 //Open port
 app.listen(port, () => {
