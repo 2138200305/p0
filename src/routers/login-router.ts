@@ -23,13 +23,14 @@ console.log (username, password);
         response.status(400).json({message: 'You are not authorized for this operation'});
     //console.log(user);
     else if (user.userid) {
-            console.log(user);
+          //  console.log(user);
         
-            const token = jwt.sign({userId:user.userId, role: user.role}, 
+            const token = jwt.sign({userid:user.userid, role: user.role}, 
                 
                     "tampaflorida" , //secretkey
                    { expiresIn : "24hr" , //expires in 24 hr
                 } );
+                
             console.log(token);
             console.log(`Thank you for entering your login information ${user.username} `);
            // response.status(200).json(user)
