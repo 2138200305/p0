@@ -8,7 +8,7 @@ let userCounter: number = 1;
 let reimbursementCounter = 1;
 
 export async function validateUser(username: string, password: string){
-    const result = await db.query(`select userid, username,firstname,lastname,email,role from users where username = $1 and password = $2;`,
+    const result = await db.query(`select user_id, username,firstname,lastname,email,user_role from users where username = $1 and user_password = $2;`,
     [username, password]);
     console.log(result.rows);
     return result.rows[0];
@@ -21,7 +21,7 @@ export function createReimbursement(reimbursement): Reimbursement {
 }
 
 export async  function getUsers(): Promise<User[]>{
-    const result = await  db.query(`SELECT  userid, username,firstname,lastname,email,role FROM "users" `);
+    const result = await  db.query(`SELECT  user_id, username,firstname,lastname,email,user_role FROM "users" `);
     return result.rows;
 
 }
@@ -36,12 +36,12 @@ export async function patchCoalese(patch: User) {
     console.log("print variables" , patch.username, patch.password, patch.firstName, patch.lastName, patch.email, patch.role, patch.userId);
     const result = await db.query(`UPDATE users SET 
             username = COALESCE($1, username),\
-            password = COALESCE($2, password),
+            user_password = COALESCE($2, password),
             firstname = COALESCE($3, firstname),
             lastname = COALESCE($4, lastname),
             email = COALESCE($5, email),
-            role = COALESCE($6, role)
-            WHERE userid = $7 
+            user_role = COALESCE($6, role)
+            WHERE user_id = $7 
             RETURNING userid, username, firstname, lastname, email, role;`,
          [patch.username, patch.password, patch.firstName, patch.lastName, patch.email, patch.role, patch.userId]);
 

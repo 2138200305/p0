@@ -10,7 +10,7 @@ const reimbursementRouter = express.Router();
 reimbursementRouter.post('', async (request: any, response: Response) => {
 
     const info:Reimbursement = request.body;
-    //console.log(request.body);
+    // console.log(request.body);
     console.log(info);
     console.log(request.token.role);
     if(request.token.role ===2){
@@ -31,7 +31,7 @@ reimbursementRouter.get('/status/:statusId',
     async (request: any, response: Response) => {
         const statusCode = parseInt(request.params.statusId);
         console.log(statusCode);
-        const reimbursement: Reimbursement = await reimbursementService.getReimbursementByStatus(statusCode);
+        const reimbursement: Reimbursement[] = await reimbursementService.getReimbursementByStatus(statusCode);
         console.log(reimbursement);
         if(request.token.role ==2){
             if (reimbursement) {
@@ -50,9 +50,9 @@ reimbursementRouter.get('/author/:id',
     async (request: any, response, Response) => {
         const id = parseInt(request.params.id);
         console.log(id);
-        console.log ('/author/:id', id, 'request.token.userid', request.token.userid)
+        console.log ('/author/:id', id, 'request.token.userid', request.token.userid);
     if(request.token.role ==2 || request.token.userid==id){
-        const reimbursement: Reimbursement = await reimbursementService.getReimbursementByAuthorId(id);
+        const reimbursement: Reimbursement[] = await reimbursementService.getReimbursementByAuthorId(id);
         if (reimbursement) {
             response.status(200).json(reimbursement);
         } else {

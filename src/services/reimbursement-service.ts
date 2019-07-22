@@ -25,15 +25,22 @@ VALUES ($1, $2, $3, $4, $5, $6) RETURNING author, amount, datesubmitted, descrip
     });
 }
 
-export async function getReimbursementByAuthorId(id: number): Promise<Reimbursement> {
+export async function getReimbursementByAuthorId(id: number): Promise<Reimbursement[]>  {
+    
     const result = await  db.query(`SELECT  * FROM reimbursement where author =$1`, [id]);
     return result.rows;
+    
+    // may need to iterate through result to print them all
+  //  const author = new Reimbursement(result[0]);
+  //  return author;
 }
 
 
-export async function getReimbursementByStatus(StatusCode: number): Promise<Reimbursement> {
+export async function getReimbursementByStatus(StatusCode: number): Promise<Reimbursement[]> {
     const result = await db.query(`SELECT * FROM reimbursement where status =$1`, [StatusCode]);
     return result.rows;
+   //const author = new Reimbursement(result[0]);
+   //return author;
 }
 
 export async function patchCoalese(patch: Reimbursement) {

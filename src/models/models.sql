@@ -86,46 +86,6 @@ insert into Users (username, user_password, firstName, lastName, email,user_role
 
 
 
-//add user json
-{
-    "userId": 2,
-    "username": "techgod",
-    "password": "longPassword",
-    "firstName": "Tech",
-    "lastName": "Employee",
-     "email": "tech@gmail.com",
-     "role": 3
-    }
-
-//add reimbursement json
-	{
-
-    "author": "1",
-    "amount": "800.47",
-    "dateSubmitted": "7-14-2013",
-    "description": "iQ order",
-    "status": "1",
-    "type": "1"
-	
-	
-}
-
-
-//sql examples
-select * from users;
-
-select * from users where username like	'techgod' and user_password like 'tgpassword';
-
-select * from reimbursement where reimbursementid = 2;
-select * from reimbursement;
-
-select * from users where username like	'techgod' and user_password like 'tgpassword';
-
-
-insert into reimbursement (author, amount, datesubmitted, description, status,reimbursementtype) values
-	(1, 89.39, '7-4-2019', 'lodging order',1, 1);
-
-	select * from users;
 
 ALTER TABLE users RENAME COLUMN user_id TO userId;
 ALTER TABLE users RENAME COLUMN user_password TO password;
@@ -134,17 +94,10 @@ ALTER TABLE users RENAME COLUMN lastname TO lastName;
 ALTER TABLE users RENAME column user_role TO role;
 
 
-userId: number;
-    username: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    role: number;
 
 
 
-select * from users where username like	'techgod' and user_password like 'tgpassword';
+
 insert into Users (username, password, firstname, lastname, email,role) values
 	('dylan', 'dpassword', 'Dylan', 'Adams', 'adams@gmail.com', 2);
 	insert into Users (username, password, firstname, lastname, email,role) values
@@ -240,3 +193,58 @@ test commit
 	
 }
 
+
+
+
+
+
+
+//add user json
+{
+    "userId": 2,
+    "username": "techgod",
+    "password": "longPassword",
+    "firstName": "Tech",
+    "lastName": "Employee",
+     "email": "tech@gmail.com",
+     "role": 3
+    }
+
+//add reimbursement json
+	{
+
+    "author": "1",
+    "amount": "800.47",
+    "dateSubmitted": "7-14-2013",
+    "description": "iQ order",
+    "status": "1",
+    "type": "1"
+	
+	
+}
+
+
+//sql examples
+select * from users;
+
+select * from users where username like	'techgod' and user_password like 'tgpassword';
+
+select * from reimbursement where reimbursementid = 2;
+select * from reimbursement;
+
+select * from users where username like	'techgod' and user_password like 'tgpassword';
+select * from users where username like	'techgod' and user_password like 'tgpassword';
+
+userId: number;
+    username: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    role: number;
+
+
+insert into reimbursement (author, amount, datesubmitted, description, status,reimbursementtype) values
+	(1, 89.39, '7-4-2019', 'lodging order',1, 1);
+
+	select * from users;

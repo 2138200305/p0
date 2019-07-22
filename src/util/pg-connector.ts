@@ -5,7 +5,7 @@ database: 'postgres',
     host: process.env.REIMBURSEMENT_URL || 'localhost',
     password: process.env.REIMBURSEMENT_PASSWORD || 'password',
     port: 5432,
-    user: process.env.REIMBURSEMENT_USER || 'user',
+    user: process.env.REIMBURSEMENT_USER || 'postgres',
 });
 
 export function closePool(){
