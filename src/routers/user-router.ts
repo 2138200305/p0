@@ -34,7 +34,9 @@ userRouter.get('/:id',
        console.log('userRouter.get', request.token.userid);
 
        if(request.token.role ==2 || request.token.userid==id){
-        const user = await userService.getUserById(id);
+       
+        const userById = await userService.getUserById(id);
+        let user = new User(userById);  
         if (user) {
             response.status(200).json(user);
         } else {
@@ -50,6 +52,7 @@ userRouter.get('/:id',
 userRouter.patch('/',
     async (request: any, response: Response) => {
         const patch: User = new User(request.body);
+        
         console.log(patch);
 
         if(request.token.role ==2){

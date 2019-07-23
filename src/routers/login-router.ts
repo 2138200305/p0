@@ -17,15 +17,17 @@ loginRouter.post('', async (request: Request, response: Response) => {
     const username = cred["username"];
     const password = cred["password"];
 console.log (username, password);
-    let user : any = await userService.validateUser(username, password);
-   
+ //   let user : any = await userService.validateUser(username, password);
+ let userLogin : any = await userService.validateUser(username, password);
+ //let user = new User("user_id", "username", null, "firstname", "lastname", "user_role");  
+ let user = new User(userLogin);  
     if (user === undefined)
         response.status(400).json({message: 'You are not authorized for this operation'});
     //console.log(user);
-    else if (user.userid) {
+    else if (user.userId) {
           //  console.log(user);
         
-            const token = jwt.sign({userid:user.userid, role: user.role}, 
+            const token = jwt.sign({userid:user.userId, role: user.role}, 
                 
                     "tampaflorida" , //secretkey
                    { expiresIn : "24hr" , //expires in 24 hr

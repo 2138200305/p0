@@ -17,12 +17,12 @@ export default class Reimbursement {
     }
 
     this.role = obj.role;
-    this.reimbursementId = obj.reimbursementId;
+    this.reimbursementId = obj.reimbursementId || obj.reimbursementid;
     this.author = obj.author;
     this.amount = obj.amount;
-    this.dateSubmitted = obj.dateSubmitted;
-    this.dateResolved = obj.dateResolved;
-    this.resolver = obj.resolver;
+    this.dateSubmitted = obj.dateSubmitted || obj.datesubmitted;
+    this.dateResolved = obj.dateResolved || obj.dateresolved;
+    this.resolver = obj.resolver  || obj.reimbursementtype;
     this.status = obj.status;
     this.type = obj.type;
 

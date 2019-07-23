@@ -2,10 +2,8 @@ import Reimbursement from '../models/reimbursements';
 import db from '../util/pg-connector';
 import { deepEqual } from 'assert';
 
-
-
 export function createReimbursement(reimbursement: Reimbursement):
-    Promise<Reimbursement[]> {
+    Promise<any> {
     // enforce business rules
     console.log(reimbursement)
     if (!reimbursement.author) {
@@ -16,12 +14,14 @@ console.log(reimbursement);
 //	(1, 89.39, '7-4-2019', 'lodging order',1, 1);
 return db.query(`INSERT INTO  reimbursement (author, amount, datesubmitted, description, status,reimbursementtype)
 VALUES ($1, $2, $3, $4, $5, $6) RETURNING author, amount, datesubmitted, description, status,reimbursementtype`,
-    [reimbursement.author, reimbursement.amount, reimbursement.dateSubmitted, reimbursement.description, reimbursement.status, reimbursement.type])
+    [reimbursement.author, reimbursement.amount, reimbursement.dateSubmitted, 
+        reimbursement.description, reimbursement.status, reimbursement.type])
     
     .then((data) => {
         return data.rows;
     }).catch((err) => {
-        return [];
+        return err + 'error from createReimbursement ';
+
     });
 }
 
@@ -42,6 +42,23 @@ export async function getReimbursementByStatus(StatusCode: number): Promise<Reim
    //const author = new Reimbursement(result[0]);
    //return author;
 }
+
+/* localhost:4339/reimbursements Patch tested Tuesday pm
+{
+
+	"role": 1,
+    "reimbursementId": 1,
+    "author": 1,
+    "amount": 100.00,
+    "dateSubmitted": "7-21-2019",
+    "dateResolved": "7-23-2019",
+    "description": "Tuesday PM",
+    "resolver": 2,
+    "status":2 ,
+    "type": 1
+	
+}
+*/	
 
 export async function patchCoalese(patch: Reimbursement) {
     console.log("print variables" , patch.amount, patch.description, patch.reimbursementId);

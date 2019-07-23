@@ -13,13 +13,13 @@ export default class User {
             return;
         }
 
-        this.userId = obj.userId;
+        this.userId = obj.userId || obj.user_id ||obj.userid || null ;
         this.username = obj.username;
-        this.password = obj.password;
-        this.firstName = obj.firstName;
-        this.lastName = obj.lastName;
+        this.password = obj.password ||obj.user_password||null;
+        this.firstName = obj.firstname||obj.firstName;
+        this.lastName = obj.lastname||obj.lastName;
         this.email= obj.email;
-        this.role= obj.role;
+        this.role= obj.user_role ||obj.role;
 
     }
 }

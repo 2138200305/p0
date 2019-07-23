@@ -2,10 +2,10 @@ import { Pool } from 'pg';
 
 const db = new Pool({
 database: 'postgres',
-    host: process.env.REIMBURSEMENT_URL || 'localhost',
-    password: process.env.REIMBURSEMENT_PASSWORD || 'password',
+    host: 'localhost', // process.env.REIMBURSEMENT_URL 
+    password: 'password', // process.env.REIMBURSEMENT_PASSWORD ||
     port: 5432,
-    user: process.env.REIMBURSEMENT_USER || 'postgres',
+    user: 'postgres', // process.env.REIMBURSEMENT_USER || 
 });
 
 export function closePool(){
