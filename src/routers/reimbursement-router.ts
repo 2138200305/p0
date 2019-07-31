@@ -3,7 +3,7 @@ import * as reimbursementService from '../services/reimbursement-service';
 import express, { Request, Response, request } from 'express';
 import db from '../util/pg-connector';
 import Role from 'models/Role';
-import { createReimbursement } from 'services/user-service';
+//import { createReimbursement } from 'services/user-service';
 const reimbursementRouter = express.Router();
 
 
@@ -26,7 +26,7 @@ reimbursementRouter.post('', async (request: any, response: Response) => {
     // console.log(request.body);
     console.log(info, "reimbursementRouter Post method");
     console.log(request.token.role);
-    if (request.token.role === 2) {
+    if (request.token.role > 0) {
         let reimbursement = await reimbursementService.createReimbursement(info);
         if (reimbursement) {
             response.status(200).json(reimbursement);
