@@ -58,20 +58,22 @@ export async function getReimbursementByStatus(StatusCode: number): Promise<Reim
     "type": 1
 	
 }
+    amount = COALESCE($2, amount),\
+    description = COALESCE($4, description),
+
 */
 
 export async function patchCoalese(patch: Reimbursement) {
-    console.log("print variables", patch.amount, patch.description, patch.reimbursementId);
+    console.log("print variables", patch.status, patch.amount, patch.description, patch.reimbursementId);
     //role, reimbursementId, author, amount, dateSubmitted, dateResolved, description, resolver, status, type;
     //reimbursementid|author|amount|datesubmitted|dateresolved|description |resolver|status|reimbursementtype| 
     const result = await db.query(`UPDATE reimbursement SET     
-    amount = COALESCE($1, amount),\
+    status = COALESCE($1, status),
     dateresolved = COALESCE($2, dateresolved) ,
-    description = COALESCE($3, description),
-    resolver = COALESCE($4, resolver) 
-    WHERE reimbursementid = $5 \
+    resolver = COALESCE($3, resolver) 
+    WHERE reimbursementid = $4 \
     RETURNING reimbursementid, author, amount,description, datesubmitted, dateresolved, resolver, status, reimbursementtype; `,
-        [patch.amount, patch.dateResolved, patch.description, patch.resolver, patch.reimbursementId]);
+        [patch.status, patch.dateResolved, patch.resolver, patch.reimbursementId]);
     if (result.rowCount === 0) {
         // throw error, 404
     } else {
